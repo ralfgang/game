@@ -1,0 +1,63 @@
+import pygame
+
+# Initialize pygame
+pygame.init()
+
+# Define screen dimensions
+screen_width = 500
+screen_height = 500
+
+# Create the window
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("Sudoku")
+
+# Define colors
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+
+# Sudoku grid sizes
+grid_size = 9
+cell_size = screen_width // grid_size
+
+# Fill the Sudoku grid (example)
+grid = [
+    [0, 0, 0, 2, 6, 0, 7, 0, 1],
+    [6, 8, 0, 0, 7, 0, 0, 9, 0],
+    [1, 9, 0, 0, 0, 4, 5, 0, 0],
+    [8, 2, 0, 1, 0, 0, 0, 4, 0],
+    [0, 0, 4, 6, 0, 2, 9, 0, 0],
+    [0, 5, 0, 0, 0, 3, 0, 2, 8],
+    [0, 0, 9, 3, 0, 0, 0, 7, 4],
+    [0, 4, 0, 0, 5, 0, 0, 3, 6],
+    [7, 0, 3, 0, 1, 8, 0, 0, 0]
+]
+
+# Function to draw the Sudoku grid
+def draw_grid():
+    for i in range(grid_size):
+        for j in range(grid_size):
+            pygame.draw.rect(screen, WHITE, (i * cell_size, j * cell_size, cell_size, cell_size), 1)
+            if grid[i][j] != 0:
+                value = str(grid[i][j])
+                text_surface = font.render(value, True, BLACK)
+                text_rect = text_surface.get_rect(center=((i * cell_size) + cell_size // 2, (j * cell_size) + cell_size // 2))
+                screen.blit(text_surface, text_rect)
+
+# Function to update the screen
+def update_screen():
+    screen.fill(BLUE)
+    draw_grid()
+    pygame.display.update()
+
+# Main game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    update_screen()
+
+# Quit pygame
+pygame.quit()
